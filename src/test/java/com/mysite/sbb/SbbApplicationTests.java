@@ -1,7 +1,9 @@
 package com.mysite.sbb;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +19,11 @@ class SbbApplicationTests {
 	
 	@Test
 	void testJpa() {
+		assertEquals(2, this.questionRepository.count());
 		Optional<Question> oq = this.questionRepository.findById(1);
-		if(oq.isPresent()) {
-			Question q = oq.get();
-			assertEquals("sbb가 무엇인가요?", q.getSubject());
-		}
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+		this.questionRepository.delete(q);
+		assertEquals(1, this.questionRepository.count());
 	}
 }
