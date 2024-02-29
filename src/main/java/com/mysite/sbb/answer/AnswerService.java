@@ -2,6 +2,7 @@ package com.mysite.sbb.answer;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,15 @@ public class AnswerService {
 	
 	public void delete(Answer answer) {
 		this.answerRepository.delete(answer);
+	}
+	
+	public void vote(Answer answer, SiteUser siteUser) {
+		Set<SiteUser> voters = answer.getVoter();
+		if (voters.contains(siteUser)) {
+			voters.remove(siteUser);
+		} else {
+			voters.add(siteUser);
+		}
+		this.answerRepository.save(answer);
 	}
 }

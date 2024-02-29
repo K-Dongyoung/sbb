@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,4 +60,13 @@ public class QuestionService {
 		this.questionRepository.delete(question);
 	}
 	
+	public void vote(Question question, SiteUser siteUser) {
+		Set<SiteUser> voters = question.getVoter();
+		if (voters.contains(siteUser)) {
+			voters.remove(siteUser);
+		} else {
+			question.getVoter().add(siteUser);
+		}
+		this.questionRepository.save(question);
+	}
 }
