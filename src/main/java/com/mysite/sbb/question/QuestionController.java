@@ -102,4 +102,11 @@ public class QuestionController {
 		this.questionService.delete(question);
 		return "redirect:/";
 	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/vote/{id}")
+	public void vote(@PathVariable("id") Integer id, Principal principal) {
+		
+	}
+	
 }

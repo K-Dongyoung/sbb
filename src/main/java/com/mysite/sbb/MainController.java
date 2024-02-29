@@ -1,12 +1,8 @@
 package com.mysite.sbb;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.mysite.sbb.question.Question;
 
 @Controller
 public class MainController {
